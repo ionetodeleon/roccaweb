@@ -75,13 +75,13 @@ export function Footer() {
               WhatsApp
             </a>
             <a
-              href="https://www.instagram.com/rocca.arquitectos/"
+              href="https://www.instagram.com/rocca_arquitectos"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
             >
               <Instagram className="h-3 w-3" />
-              @rocca.arquitectos
+              @rocca_arquitectos
             </a>
           </div>
         </div>

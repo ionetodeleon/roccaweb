@@ -68,7 +68,7 @@ export default function ContactoPage() {
                         rel="noopener noreferrer"
                         className="mt-1 text-sm text-foreground transition-colors hover:text-accent"
                       >
-                        +598 99 123 456
+                        +598 96 110 801
                       </a>
                     </div>
                   </div>
@@ -80,12 +80,12 @@ export default function ContactoPage() {
                         Instagram
                       </p>
                       <a
-                        href="https://www.instagram.com/rocca.arquitectos/"
+                        href="https://www.instagram.com/rocca_arquitectos"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="mt-1 text-sm text-foreground transition-colors hover:text-accent"
                       >
-                        @rocca.arquitectos
+                        @rocca_arquitectos
                       </a>
                     </div>
                   </div>
