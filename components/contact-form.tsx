@@ -19,9 +19,9 @@ export function ContactForm() {
     setStatus("loading")
 
     try {
-      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_lvcxsk7"
-      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_yc8mt33"
-      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "HgRL5eNBQ3DOSPdyS"
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_o0c24mf"
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_ez4o49a"
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "bH_7DkCpUShlwvvzH"
 
       if (!serviceId || !templateId || !publicKey) {
         throw new Error("Falta configurar EmailJS")
