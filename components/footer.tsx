@@ -66,7 +66,7 @@ export function Footer() {
               info@roccaarquitectos.com
             </a>
             <a
-              href="https://wa.me/59899123456"
+              href="https://wa.me/59896110801"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
