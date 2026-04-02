@@ -79,10 +79,8 @@ function StarRating({ rating }: { rating: number }) {
 
 function ReviewCard({
   review,
-  index,
 }: {
   review: (typeof reviews)[0]
-  index: number
 }) {
   const initials = review.name
     .split(" ")
@@ -94,9 +92,6 @@ function ReviewCard({
   return (
     <div
       className="group flex h-full min-w-0 flex-col justify-between border border-border bg-background p-8 transition-all duration-500 hover:border-foreground/20 hover:shadow-sm"
-      style={{
-        animationDelay: `${index * 150}ms`,
-      }}
     >
       <div>
         <div className="flex items-center justify-between">
@@ -130,7 +125,7 @@ function ReviewCard({
 export function Reviews() {
   const [isVisible, setIsVisible] = useState(false)
   const [currentPage, setCurrentPage] = useState(0)
-  const sectionRef = useRef<HTMLElement>(null)
+  const sectionRef = useRef<HTMLElement | null>(null)
   const autoplayRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   const getCardsPerPage = useCallback(() => {
@@ -179,6 +174,11 @@ export function Reviews() {
     }
   }, [isVisible, resetAutoplay])
 
+  useEffect(() => {
+    // Si cambia `cardsPerPage` por resize, aseguramos que la página actual siga siendo válida.
+    setCurrentPage((prev) => (totalPages > 0 ? prev % totalPages : 0))
+  }, [totalPages])
+
   const nextPage = () => {
     setCurrentPage((prev) => (prev + 1) % totalPages)
     resetAutoplay()
@@ -189,9 +189,11 @@ export function Reviews() {
     resetAutoplay()
   }
 
-  const visibleReviews = reviews.slice(
-    currentPage * cardsPerPage,
-    currentPage * cardsPerPage + cardsPerPage
+  const pages = Array.from({ length: totalPages }, (_, pageIndex) =>
+    reviews.slice(
+      pageIndex * cardsPerPage,
+      pageIndex * cardsPerPage + cardsPerPage
+    )
   )
 
   return (
@@ -277,16 +279,30 @@ export function Reviews() {
             </div>
           </div>
 
-          {/* Reviews grid */}
-          <div
-            className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3"
-            key={currentPage}
-          >
-            {visibleReviews.map((review, i) => (
-              <div key={review.name} className="animate-fade-up">
-                <ReviewCard review={review} index={i} />
-              </div>
-            ))}
+          {/* Reviews slider (slide horizontal por páginas) */}
+          <div className="mt-14 overflow-hidden">
+            <div
+              className="flex transition-transform duration-700 ease-out will-change-transform"
+              style={{
+                transform: `translateX(-${currentPage * 100}%)`,
+              }}
+            >
+              {pages.map((pageReviews, pageIndex) => (
+                <div
+                  key={pageIndex}
+                  className="shrink-0"
+                  style={{ flex: "0 0 100%" }}
+                >
+                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {pageReviews.map((review) => (
+                      <div key={review.name}>
+                        <ReviewCard review={review} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Page dots + mobile arrows */}
